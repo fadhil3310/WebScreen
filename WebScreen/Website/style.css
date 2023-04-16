@@ -1,0 +1,24 @@
+* {
+    user-select: none;
+}
+
+body {
+    margin: 0;
+}
+
+#screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#fullscreenButton {
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+#canvas {
+    height: 100vh !important;
+    image-rendering: pixelated;
+}

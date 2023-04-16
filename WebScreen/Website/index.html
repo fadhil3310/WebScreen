@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="./style.css" rel="stylesheet">
+</head>
+<body onload="onload()">
+    <button id="fullscreenButton">Fullscreen</button>
+    <div id="screen">
+        <canvas id="canvas" width="1366" height="768"></canvas>
+    </div>
+    
+    <script>
+        const canvas = document.querySelector("#canvas")
+        const context = canvas.getContext('2d')
+
+        let widthMultiplier = 1366 / canvas.clientWidth
+        let heightMultiplier = 768 / canvas.clientHeight
+
+        const bitmapSocket = new WebSocket(`ws://${location.host}/bitmap`)
+        bitmapSocket.onopen = () => log("Bitmap connection open")
+        bitmapSocket.onclose = () => log("Bitmap connection close")
+        bitmapSocket.onmessage = (msg) => {
+            //data = msg.datat
+            //log(msg.data)
+            /*const reader = new FileReader()
+            reader.readAsArrayBuffer(msg.data)
+            reader.onloadend = () => {
+                const imageData = new ImageData(new Uint8ClampedArray(reader.result), 1366, 768)
+                createImageBitmap(imageData).then((img) => {
+                    context.drawImage(img, 0, 0)
+                })     
+            }*/
+            createImageBitmap(msg.data).then((img) => {
+                context.drawImage(img, 0, 0, 1366, 768)
+            })           
+        }
+
+        const inputSocket = new WebSocket(`ws://${location.host}/input`)
+        inputSocket.onopen = () => log("Input connection open")
+        inputSocket.onclose = () => log("Input connection close")
+
+        const logSocket = new WebSocket(`ws://${location.host}/log`)
+        logSocket.onopen = () => log("Log connection open")
+        logSocket.onclose = () => log("Log connection close")
+
+        const body = document.body
+
+        let pointerDown = false
+
+        /*canvas.addEventListener("pointerdown", ev => {
+            pointerDown = true
+            let message = { Type: 1, ID: ev.pointerId, X: Math.floor(ev.offsetX * widthMultiplier), Y: Math.floor(ev.offsetY * heightMultiplier) }
+            log("Message: " + JSON.stringify(message))
+            inputSocket.send(JSON.stringify(message))
+        })
+
+        canvas.addEventListener("pointermove", ev => {
+            if (pointerDown) {
+                let message = { Type: 2, ID: ev.pointerId, X: Math.floor(ev.offsetX * widthMultiplier), Y: Math.floor(ev.offsetY * heightMultiplier) }
+                log("Message: " + JSON.stringify(message))
+                inputSocket.send(JSON.stringify(message))
+            }
+            
+        })
+
+        canvas.addEventListener("pointerup", ev => {
+            pointerDown = false
+            let message = { Type: 3, ID: ev.pointerId, X: Math.floor((ev.offsetX * widthMultiplier)), Y: Math.floor(ev.offsetY * heightMultiplier) }
+            log("Message: " + JSON.stringify(message))
+            inputSocket.send(JSON.stringify(message))
+        })*/
+
+        const touches = []
+
+        const waitForUp = []
+
+        /*setInterval(() => {
+            waitForUp.forEach(touch => {
+                let message = [{ Type: 1, ID: touch.identifier, X: Math.floor((touch.pageX - canvas.offsetLeft) * widthMultiplier), Y: Math.floor(touch.pageY * heightMultiplier) }]
+                inputSocket.send(JSON.stringify(message))
+            })
+        }, 100)*/
+
+        canvas.addEventListener("touchstart", ev => {
+            let changedTouches = ev.changedTouches
+            let messages = []
+            for (const touch of changedTouches) {
+                console.log(touch)
+                let message = { Type: 1, ID: touch.identifier, X: Math.floor((touch.pageX - canvas.offsetLeft) * widthMultiplier), Y: Math.floor(touch.pageY * heightMultiplier) }
+                log("Message: " + JSON.stringify(message))
+                messages.push(message)
+                //waitForUp.push(touch)
+            }
+            inputSocket.send(JSON.stringify(messages))
+            //log(messages)
+        })
+
+        canvas.addEventListener("touchmove", ev => {
+            let changedTouches = ev.changedTouches
+            let messages = []
+            for (const touch of changedTouches) {
+                let message = { Type: 2, ID: touch.identifier, X: Math.floor((touch.pageX - canvas.offsetLeft) * widthMultiplier), Y: Math.floor(touch.pageY * heightMultiplier) }
+                log("Message: " + JSON.stringify(message))
+                messages.push(message)
+                /*const index = waitForUp.findIndex(x => x.identifier == touch.identifier)
+                if (index != -1) {
+                    waitForUp.splice(index, 1)
+                }*/
+            }
+            inputSocket.send(JSON.stringify(messages))
+        })
+
+        canvas.addEventListener("touchend", ev => {
+            let changedTouches = ev.changedTouches
+            let messages = []
+            for (const touch of changedTouches) {
+                let message = { Type: 3, ID: touch.identifier, X: Math.floor((touch.pageX - canvas.offsetLeft) * widthMultiplier), Y: Math.floor(touch.pageY * heightMultiplier) }
+                log("Message: " + JSON.stringify(message))
+                messages.push(message)
+            }
+            inputSocket.send(JSON.stringify(messages))
+            /*const index = waitForUp.findIndex(x => x.identifier == touch.identifier)
+                if (index != -1) {
+                    waitForUp.splice(index, 1)
+                }*/
+        })
+
+        canvas.addEventListener("touchcancel", ev => {
+            let changedTouches = ev.changedTouches
+            let messages = []
+            for (const touch of changedTouches) {
+                let message = { Type: 3, ID: touch.identifier, X: Math.floor((touch.pageX - canvas.offsetLeft) * widthMultiplier), Y: Math.floor(touch.pageY * heightMultiplier) }
+                log("Message: " + JSON.stringify(message))
+                messages.push(message)
+            }
+            inputSocket.send(JSON.stringify(messages))
+            /*const index = waitForUp.findIndex(x => x.identifier == touch.identifier)
+                if (index != -1) {
+                    waitForUp.splice(index, 1)
+                }*/
+        })
+
+
+        const resizeObserver = new ResizeObserver(entries => {
+            for (let entry in entries) {
+                widthMultiplier = 1366 / canvas.clientWidth
+                heightMultiplier = 768 / canvas.clientHeight
+                //log(`Canvas size changed ${canvas.clientWidth} ${canvas.clientHeight} ${widthMultiplier} ${heightMultiplier}`)
+            } 
+        })
+
+        window.onerror = (event, source, lineno, colno, error) => log(`Error: lineno ${lineno} colno ${colno} error ${error}`)
+
+        function log(message) {
+            console.log(message)
+            logSocket.send(message)
+        }
+
+        function onload() {
+            console.log("onload")
+            resizeObserver.observe(canvas)
+            document.querySelector('#fullscreenButton').addEventListener('click', ev => {
+                if(!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen()
+                } else {
+                    document.exitFullscreen()
+                }   
+            })
+            
+        }
+    </script>
+</body>
+</html>

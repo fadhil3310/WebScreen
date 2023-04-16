@@ -1,0 +1,18 @@
+﻿<Window x:Class="WebScreen.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WebScreen"
+        mc:Ignorable="d"
+								Closing="Window_Closing"
+        Title="MainWindow" Height="450" Width="800">
+				<Grid>
+								<ListBox x:Name="logList" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+								<Image x:Name="image" HorizontalAlignment="Left" Height="169" Margin="10,10,0,0" VerticalAlignment="Top" Width="291"/>
+								<Image HorizontalAlignment="Left" Height="100" Margin="164,42,0,0" VerticalAlignment="Top" Width="100" Source="pack://application:,,,/IMG_20221220_135754.jpg"/>
+								<Label x:Name="label" Content="Label" HorizontalAlignment="Left" Margin="299,42,0,0" VerticalAlignment="Top"/>
+
+
+				</Grid>
+</Window>

@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows10.0.22621.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="IMG_20221220_135754.jpg" />
+    <None Remove="Website\*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Website\*" />
+  </ItemGroup>
+		
+  <ItemGroup>
+    <PackageReference Include="EmbedIO" Version="3.5.2" />
+    <PackageReference Include="GenHTTP.Core" Version="6.4.0" />
+    <PackageReference Include="GenHTTP.Modules.StaticWebsites" Version="6.4.0" />
+    <PackageReference Include="PhotoSauce.MagicScaler" Version="0.13.2" />
+    <PackageReference Include="ScreenCapture.NET" Version="1.2.0" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="2.1.3" />
+  </ItemGroup>
+		
+  <ItemGroup>
+    <Resource Include="IMG_20221220_135754.jpg" />
+  </ItemGroup>
+		
+  <ItemGroup>
+    <EmbeddedResource Update="Website\index.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Website\style.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>
+ 
