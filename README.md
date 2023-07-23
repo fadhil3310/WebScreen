@@ -10,6 +10,9 @@ Pertama kali dibuat awalnya karena penasaran saja bagaimana Windows bekerja apab
 ## Bagaimana cara kerjanya?
 Tidak terlalu kompleks
 
-Saat aplikasi dijalankan, WebScreen akan menjalankan server http lokal untuk tampilan web bagi perangkat lain dan juga server websocket untuk transmisi gambar layar perangkat Windows. Nantinya saat ada perangkat lain yang terhubung ke server, perangkat tersebut akan membuat koneksi ke server melalui websocket untuk menerima gambar.
+Saat aplikasi dijalankan, WebScreen akan menjalankan server http lokal untuk tampilan web bagi perangkat client dan juga server websocket untuk transmisi gambar layar perangkat Windows. Nantinya saat ada perangkat client yang terhubung ke server, perangkat tersebut akan membuat koneksi kembali ke server websocket untuk menerima gambar.
 
-Untuk mendapatkan gambar layar, WebScreen menggunakan DirectX. Setelah didapatkan, WebScreen akan memperkecil dan menkrompes gambar agar lebih cepat untuk dikirim ke perangkat lain.
+WebScreen mendapatkan gambar layar langsung melalui api DirectX, tidak menggunakan BitBlt agar - menurut pandangan saya - dapat menangkap gambar secara lebih cepat dan efisien. Setelah didapatkan, WebScreen akan memperkecil dan menkrompes gambar menjadi file PNG atau JPEG (sesuai keinginan user) agar lebih cepat untuk dikirim ke perangkat client.
+
+## TODO
+1. Kirim gambar layar melalui streaming video MP4 tanpa lewat websocket, jangan melalui file PNG atau JPEG agar lebih cepat dan tidak memakan power usage yang tinggi (untuk menencode video dapat menggunakan Windows Media Foundation)
