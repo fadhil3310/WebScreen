@@ -10,6 +10,8 @@ Dapat digunakan untuk membantu developer menguji aplikasi yang dibuat untuk dija
 
 Pertama kali dibuat awalnya karena penasaran saja bagaimana Windows bekerja apabila menggunakan layar sentuh.
 
+Dibuat pakai WPF.
+
 ## Bagaimana cara kerjanya?
 Tidak terlalu kompleks,
 
