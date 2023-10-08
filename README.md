@@ -22,4 +22,4 @@ WebScreen mendapatkan gambar layar langsung melalui API DirectX, tidak menggunak
 2. Update UI versi Client dan migrasikan ke React.
 
 ## NOTICE
-Aplikasi ini tidak akan dibuat cross-platform. Khusus untuk Windows saja. Apabila ingin mencari aplikasi serupa di Linux, coba [Weylus](https://github.com/H-M-H/Weylus)
+Aplikasi ini tidak akan dibuat cross-platform. Khusus untuk Windows saja. Apabila ingin mencari aplikasi serupa di Linux, coba [Weylus](https://github.com/H-M-H/Weylus).
