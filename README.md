@@ -4,7 +4,7 @@
 
 
 ## Apa ini?
-Sebuah aplikasi untuk mencerminkan layar Windows ke perangkat lain melalui internet lokal menggunakan web browser dan juga untuk mencerminkan touch input dari perangkat client ke Windows (10 touch point).
+Sebuah aplikasi untuk mencerminkan layar Windows ke perangkat lain melalui internet lokal menggunakan web browser dan juga untuk mensimulasikan touch input dari perangkat client ke Windows.
 
 Dapat digunakan untuk membantu developer menguji aplikasi yang dibuat untuk dijalankan pada perangkat Windows layar sentuh menggunakan perangkat lain yang memiliki layar sentuh (seperti smartphone). Cocok apabila layar perangkat Windows Anda tidak memiliki sensor layar sentuh.
 
@@ -24,4 +24,4 @@ WebScreen mendapatkan gambar layar langsung melalui API DirectX, tidak menggunak
 2. Update UI versi Client dan migrasikan ke React.
 
 ## NOTICE
-Aplikasi ini tidak akan dibuat cross-platform. Khusus untuk Windows saja. Apabila ingin mencari aplikasi serupa di Linux, coba [Weylus](https://github.com/H-M-H/Weylus).
+Aplikasi ini tidak akan dibuat cross-platform. Khusus untuk Windows saja. Apabila ingin mencari aplikasi dengan fungsionalitas serupa di Linux, coba [Weylus](https://github.com/H-M-H/Weylus).
