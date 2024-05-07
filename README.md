@@ -4,13 +4,13 @@
 
 
 ## Apa ini?
-Sebuah aplikasi untuk mencerminkan layar Windows ke perangkat lain melalui internet lokal menggunakan web browser dan juga untuk mensimulasikan touch input dari perangkat client ke Windows.
+Sebuah aplikasi untuk mencerminkan layar Windows ke perangkat lain melalui internet lokal dan juga untuk mensimulasikan touch input dari perangkat client ke Windows.
 
 Dapat digunakan untuk membantu developer menguji aplikasi yang dibuat untuk dijalankan pada perangkat Windows layar sentuh menggunakan perangkat lain yang memiliki layar sentuh (seperti smartphone). Cocok apabila layar perangkat Windows Anda tidak memiliki sensor layar sentuh.
 
 Pertama kali dibuat awalnya karena penasaran saja bagaimana Windows bekerja apabila menggunakan layar sentuh.
 
-Dibuat pakai WPF.
+Dibuat pakai WPF. Untuk sisi client dibuat menggunakan native HTML.
 
 ## Bagaimana cara kerjanya?
 Tidak terlalu kompleks,
