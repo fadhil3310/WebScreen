@@ -1,7 +1,5 @@
 # WebScreen
 
-![image](https://github.com/fadhil3310/WebScreen/assets/80736446/bfaa02df-5a15-47d8-8fe6-37390afb47cc)
-
 
 ## Apa ini?
 Sebuah aplikasi untuk mencerminkan layar Windows ke perangkat lain melalui internet lokal dan juga untuk mensimulasikan touch input dari perangkat client ke Windows.
@@ -25,3 +23,12 @@ WebScreen mendapatkan gambar layar langsung melalui API DirectX, tidak menggunak
 
 ## NOTICE
 Aplikasi ini tidak akan dibuat cross-platform. Khusus untuk Windows saja. Apabila ingin mencari aplikasi dengan fungsionalitas serupa di Linux, coba [Weylus](https://github.com/H-M-H/Weylus).
+
+## Screenshot
+Tampilan utama WebScreen.
+
+![image](https://github.com/fadhil3310/WebScreen/assets/80736446/bfaa02df-5a15-47d8-8fe6-37390afb47cc)
+
+Tampilan Client.
+
+![Screenshot (751)](https://github.com/user-attachments/assets/3a3b29df-a2ec-4a3a-802a-7ef80c8b3dbb)
